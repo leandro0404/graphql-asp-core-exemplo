@@ -16,7 +16,7 @@ https://localhost:44323/ui/playground
   }
 } 
 ```
- 
+ ![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/graphql-request.png)
 
 * copie a o trecho abaixo para começar entender  o formato de consultas
  ```javascript
@@ -75,5 +75,4 @@ mutation Post($post: PostInputType!) {
 
 
 
-* request na api 
-![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/graphql-request.png)
+
