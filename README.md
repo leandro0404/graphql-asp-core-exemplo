@@ -3,16 +3,20 @@ projeto criado para estudo de graphql usando  .net core 2.2
 
  
  * query simples  
- 
+
+```javascript
  query {
   post
   {
     id,
     description   
   }
-}
+} 
+```
  
+
 * copie a o trecho abaixo para começar entender  o formato de consultas
+ 
  query {
   post
 (
