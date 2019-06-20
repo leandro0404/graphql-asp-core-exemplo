@@ -49,7 +49,7 @@ https://localhost:44323/ui/playground
   
 }
 ```
-![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/query_exemplo_passando_filtro.jpg)
+![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/query_exemplo_passando_filtro.png)
 
 ```javascript
 mutation Post($post: PostInputType!) {
@@ -71,7 +71,7 @@ mutation Post($post: PostInputType!) {
 }
 ````
 
-![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/mutation_exemplo_criando_post.jpg)
+![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/mutation_exemplo_criando_post.png)
 
 
 
