@@ -69,3 +69,8 @@ mutation Post($post: PostInputType!) {
 ````
 
 ![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/mutation_exemplo_criando_post.jpg)
+
+
+
+* request na api 
+![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/graphql-request.png)
