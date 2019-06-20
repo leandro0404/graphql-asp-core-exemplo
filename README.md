@@ -1,6 +1,9 @@
 # graphql-asp-core-exemplo
 projeto criado para estudo de graphql usando  .net core 2.2
 
+url playground
+https://localhost:44323/ui/playground
+
  
  * query simples  
 
