@@ -16,7 +16,7 @@ projeto criado para estudo de graphql usando  .net core 2.2
  
 
 * copie a o trecho abaixo para começar entender  o formato de consultas
- 
+ ```javascript
  query {
   post
 (
@@ -45,8 +45,10 @@ projeto criado para estudo de graphql usando  .net core 2.2
   }
   
 }
+```
 ![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/query_exemplo_passando_filtro.jpg)
 
+```javascript
 mutation Post($post: PostInputType!) {
   createPost(postInput: $post) {
     id
@@ -54,15 +56,16 @@ mutation Post($post: PostInputType!) {
     title
   }
 }
-
+```
 
 * query variables
-
+```javascript
 {
   "post": {
     "description": "name",
     "title": "teste"
   }
 }
+````
 
 ![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/mutation_exemplo_criando_post.jpg)
