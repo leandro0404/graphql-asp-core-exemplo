@@ -2,13 +2,13 @@
 projeto criado para estudo de graphql usando  .net core 2.2
 
 Pacotes usados.
-  * GraphQL
-  * GraphQL.Server.Transports.AspNetCore
-  * GraphQL.Server.Ui.Playground
+  GraphQL
+  GraphQL.Server.Transports.AspNetCore
+  GraphQL.Server.Ui.Playground
 
 
 
-
+# Exemplos de Querys e Mutations do projeto.
  
  * query simples  
 
