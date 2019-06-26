@@ -46,7 +46,7 @@ Pacotes usados.
     author{
       id,name
     },
-    comments{
+    comment{
       id, text
     },
     author{
