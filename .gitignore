@@ -1,3 +1,3 @@
-../.vs/
- bin/
-obj/
+src/.vs/
+src/API.Instragram/bin/
+src/API.Instragram/obj/

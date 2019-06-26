@@ -10,7 +10,7 @@ namespace API.Instragram.Entities
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public int Likes { get; set; }
-        public ICollection<Comment> Comments{ get; set; }
+        public ICollection<Comment> Comment{ get; set; }
         public Author Author { get; set; }
     }
 }

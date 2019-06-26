@@ -22,7 +22,7 @@ namespace API.Instragram.Repository
                 {
                     Id = i,
                     Description = "Teste " + i,
-                    Comments = new List<Comment> {
+                    Comment = new List<Comment> {
                           new Comment { Id = i, Text = "blalblalbal"}
 
                       },

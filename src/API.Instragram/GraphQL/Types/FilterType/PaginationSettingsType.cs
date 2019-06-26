@@ -9,7 +9,7 @@ namespace API.Instragram.GraphQL.Types.Filter
 
             Field(x => x.PageIndex);
             Field(x => x.PageSize);
-            Field<SortSettingsType>("sortSettings");
+            Field<SortSettingsType>(typeof(SortSettings).Name);
         }
     }
 
