@@ -1,9 +1,6 @@
-﻿using API.Instragram.Repository;
-using API.Instragram.Repository.Context;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -23,10 +20,10 @@ namespace API.Instragram
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRepository(Configuration);
-            services.AddGraphQl();            
+            services.AddGraphQl();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; });
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +41,7 @@ namespace API.Instragram
 
             app.UseGraphQL();
             app.UseMvc();
+            app.UseFakeRepository();
         }
     }
 }

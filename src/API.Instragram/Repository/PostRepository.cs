@@ -11,7 +11,6 @@ namespace API.Instragram.Repository
         private readonly PostDbContext _context;
         public PostRepository(PostDbContext context)
         {
-
             _context = context;
         }
 

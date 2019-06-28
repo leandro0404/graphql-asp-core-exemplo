@@ -1,6 +1,7 @@
 ﻿using API.Instragram.GraphQL.Schemas;
 using API.Instragram.Repository;
 using API.Instragram.Repository.Context;
+using API.Instragram.Repository.FakeRepository;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
@@ -28,9 +29,7 @@ namespace API.Instragram
     {
         public static void AddRepository(this IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddDbContext<PostDbContext>(option =>
-        option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddDbContext<PostDbContext>(option => option.UseInMemoryDatabase(databaseName: "PostDataBaseMemory"));
             services.AddTransient<PostRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
 
@@ -43,6 +42,20 @@ namespace API.Instragram
         {
             app.UseGraphQL<PostSchema>();
             app.UseGraphQLPlayground(options: new GraphQLPlaygroundOptions());
+            return app;
+        }
+    }
+
+    public static class FakeRepositoryExtension
+    {
+        public static IApplicationBuilder UseFakeRepository(this IApplicationBuilder app)
+        {
+
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<PostDbContext>();
+                FakeRepository.AdicionarDadosTeste(context);
+            }
             return app;
         }
     }
