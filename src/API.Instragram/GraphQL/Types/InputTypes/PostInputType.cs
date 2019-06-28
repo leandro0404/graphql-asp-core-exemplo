@@ -10,6 +10,7 @@ namespace API.Instragram.GraphQL.Types
 
             Field(x => x.Title);
             Field(x => x.Description);
+            Field(x => x.AuthorId);
 
         }
     }

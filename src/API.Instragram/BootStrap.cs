@@ -1,9 +1,12 @@
 ﻿using API.Instragram.GraphQL.Schemas;
 using API.Instragram.Repository;
+using API.Instragram.Repository.Context;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace API.Instragram
@@ -23,9 +26,13 @@ namespace API.Instragram
 
     public static class ServicesRepository
     {
-        public static void AddRepository(this IServiceCollection services)
+        public static void AddRepository(this IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddSingleton<IPostRepostirory, PostRepository>();
+            services.AddDbContext<PostDbContext>(option =>
+        option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<PostRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
 
         }
     }

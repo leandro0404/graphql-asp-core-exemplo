@@ -7,7 +7,7 @@ namespace API.Instragram.GraphQL.Mutation
 {
     public class PostMutation : ObjectGraphType
     {
-        public PostMutation(IPostRepostirory repository)
+        public PostMutation(IPostRepository repository)
         {
             Field<PostType>(
                 "createPost",

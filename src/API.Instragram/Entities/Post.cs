@@ -11,6 +11,7 @@ namespace API.Instragram.Entities
         public DateTime Created { get; set; }
         public int Likes { get; set; }
         public ICollection<Comment> Comment{ get; set; }
+        public int AuthorId { get; set; }
         public Author Author { get; set; }
     }
 }

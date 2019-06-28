@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace API.Instragram.Repository
 {
-    public interface IPostRepostirory
+    public interface IPostRepository
     {
-        IEnumerable<Post> Get(PaginationSettings pageSettings);
+        IEnumerable<Post> Get();
         Post Created(Post post);
+        IEnumerable<Comment> GetComments(int postId);
 
     }
 }

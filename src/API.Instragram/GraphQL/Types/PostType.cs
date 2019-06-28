@@ -1,11 +1,14 @@
 ﻿using API.Instragram.Entities;
+using API.Instragram.GraphQL.Types.Filter;
+using API.Instragram.Repository;
 using GraphQL.Types;
+using System.Linq;
 
 namespace API.Instragram.GraphQL.Types
 {
     public class PostType : ObjectGraphType<Post>
     {
-        public PostType()
+        public PostType(IPostRepository repository)
         {
             Field(x => x.Id);
             Field(x => x.Title);
@@ -13,7 +16,16 @@ namespace API.Instragram.GraphQL.Types
             Field(x => x.Created);
             Field(x => x.Likes);
             Field<AuthorType>(typeof(Author).Name);
-            Field<ListGraphType<CommentType>>(typeof(Comment).Name);
+            Field<ListGraphType<CommentType>>(
+              typeof(Comment).Name,
+              arguments: new QueryArguments(new QueryArgument<PaginationSettingsType> { Name = "pageSettings" }),
+              resolve: context =>
+              {
+                  var postId = context.Source.Id;
+                  var pageSettings = context.GetArgument<PaginationSettings>("pageSettings", new PaginationSettings());
+                  return repository.GetComments(postId).AsQueryable().Page(pageSettings).ToList();
+              }
+          );
         }
     }
 }

@@ -8,7 +8,7 @@ namespace API.Instragram.GraphQL.Queries
 {
     public class PostQuery : ObjectGraphType
     {
-        public PostQuery(IPostRepostirory repository)
+        public PostQuery(IPostRepository repository)
         {
             Field<ListGraphType<PostType>>(
                "post",
@@ -16,7 +16,7 @@ namespace API.Instragram.GraphQL.Queries
                resolve: context =>
                {
                    var pageSettings = context.GetArgument<PaginationSettings>("pageSettings", new PaginationSettings());
-                   return repository.Get(pageSettings).ToList();
+                   return repository.Get().AsQueryable().Page(pageSettings).ToList();
                }
            );
         }
