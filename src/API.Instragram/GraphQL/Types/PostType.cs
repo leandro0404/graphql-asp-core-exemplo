@@ -1,5 +1,5 @@
 ﻿using API.Instragram.Entities;
-using API.Instragram.GraphQL.Types.Filter;
+using API.Instragram.GraphQL.Types.FilterType;
 using API.Instragram.Repository;
 using GraphQL.Types;
 using System.Linq;

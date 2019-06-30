@@ -1,6 +1,6 @@
 ﻿using GraphQL.Types;
 
-namespace API.Instragram.GraphQL.Types.Filter
+namespace API.Instragram.GraphQL.Types.FilterType
 {
     public class SortSettingsType : InputObjectGraphType<SortSettings>
     {

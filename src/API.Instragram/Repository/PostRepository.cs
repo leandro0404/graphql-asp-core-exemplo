@@ -21,14 +21,15 @@ namespace API.Instragram.Repository
             return post;
         }
 
-        public IEnumerable<Post> Get()
+        public IQueryable<Post> Get()
         {
-            return _context.Post.Include(x => x.Author).AsQueryable();
+            var pageSettings = new PaginationSettings();
+            return _context.Post.Include(x => x.Author);
         }
 
         public IEnumerable<Comment> GetComments(int postId)
         {
-            return _context.Comment.Where(x => x.PostId == postId).AsQueryable();
+            return _context.Comment.Where(x => x.PostId == postId);
         }
     }
 }
