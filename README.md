@@ -92,5 +92,38 @@ mutation Post($post: PostInputType!) {
 ![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/mutation_exemplo_criando_post.png)
 
 
+* consultas complexas envolvendo filtros com join em itens filhos
+```javascript
+query {
+ post
+(
+  filter:{
+    author:{
+      id:2
+    }
+  },
+    pageSettings:{
+    pageIndex:0,
+    pageSize:15,
+    sortSettings:{
+    orderBy:"title",
+    direction:ASC
+    }
+  }
+)
+ {
+   id
+   title,
+   description ,
+   likes,
+   author{
+     id,name
+   }
+ }
+ 
+}
+```
+![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/query_exemplo_passando_filtro_com_join.png)
+
 
 
