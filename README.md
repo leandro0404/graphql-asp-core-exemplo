@@ -27,30 +27,41 @@ Pacotes usados.
 
 * copie a o trecho abaixo para começar entender  o formato de consultas
  ```javascript
- query {
+query {
   post
 (
   pageSettings:{
     pageIndex:0,
-    pageSize:5,
+    pageSize:2,
     sortSettings:{
       orderBy:"id",
-      direction:DESC
+      direction:DESC 
     }
   }
 )
   {
-    id,
+    id
+    title,
     description ,
     likes,
     author{
       id,name
     },
-    comment{
-      id, text
-    },
+    comment (
+      pageSettings:{
+        pageIndex:0,
+        pageSize:15,
+        sortSettings:{
+          orderBy:"id",
+          direction:DESC
+        }
+      }
+    ){
+      id,
+      text
+    }
     author{
-      name
+     id
     }
   }
   
