@@ -4,7 +4,7 @@ using System.Linq;
 using API.Instragram.GraphQL.Types.FilterType;
 using API.Instragram.Repository;
 using API.Instragram.Filter;
-
+using System.Collections.Generic;
 
 namespace API.Instragram.GraphQL.Queries
 {
@@ -24,11 +24,7 @@ namespace API.Instragram.GraphQL.Queries
                    var query = FilterLinq<API.Instragram.Entities.Post>
                    .GetWherePredicate(input);
 
-                   if(query != null)
                    return repository.Get().Where(query).Page(pageSettings);
-                   else
-                       return repository.Get().Page(pageSettings).ToList();
-
                }
            );
         }
