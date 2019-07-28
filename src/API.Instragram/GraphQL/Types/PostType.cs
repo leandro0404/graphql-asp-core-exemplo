@@ -1,14 +1,19 @@
 ﻿using API.Instragram.Entities;
+using API.Instragram.Filter;
 using API.Instragram.GraphQL.Types.FilterType;
 using API.Instragram.Repository;
+using GraphQL.DataLoader;
 using GraphQL.Types;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace API.Instragram.GraphQL.Types
 {
     public class PostType : ObjectGraphType<Post>
     {
-        public PostType(IPostRepository repository)
+        public PostType(IDataLoaderContextAccessor accessor, IPostRepository repository)
         {
             Field(x => x.Id);
             Field(x => x.Title);
@@ -16,16 +21,16 @@ namespace API.Instragram.GraphQL.Types
             Field(x => x.Created);
             Field(x => x.Likes);
             Field<AuthorType>(typeof(Author).Name);
-            Field<ListGraphType<CommentType>>(
-              typeof(Comment).Name,
-              arguments: new QueryArguments(new QueryArgument<PaginationSettingsType> { Name = "pageSettings" }),
-              resolve: context =>
+            Field<ListGraphType<CommentType>, IEnumerable<Comment>>()
+              .Name("Comment")
+              .Argument<PaginationSettingsType>("pageSettings", "pageSettings")
+              .ResolveAsync(context =>
               {
-                  var postId = context.Source.Id;
                   var pageSettings = context.GetArgument<PaginationSettings>("pageSettings", new PaginationSettings());
-                  return repository.GetComments(postId).AsQueryable().Page(pageSettings).ToList();
-              }
-          );
+                  var loader = accessor.Context.GetOrAddCollectionBatchLoader<int, Comment>("GetCommentsByIdAsync", (id) => repository.GetCommentsByIdAsync(id, pageSettings));
+                  return loader.LoadAsync(context.Source.Id);
+
+              });
         }
     }
 }

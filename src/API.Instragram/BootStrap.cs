@@ -21,7 +21,7 @@ namespace API.Instragram
             services.AddScoped<PostSchema>();
 
             services.AddGraphQL(o => { o.ExposeExceptions = false; })
-                .AddGraphTypes(ServiceLifetime.Scoped);
+                .AddGraphTypes(ServiceLifetime.Scoped).AddDataLoader();
         }
     }
 
@@ -29,7 +29,8 @@ namespace API.Instragram
     {
         public static void AddRepository(this IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddDbContext<PostDbContext>(option => option.UseInMemoryDatabase(databaseName: "PostDataBaseMemory"));
+            //services.AddDbContext<PostDbContext>(option => option.UseInMemoryDatabase(databaseName: "PostDataBaseMemory"));
+            services.AddDbContext<PostDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<PostRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
 

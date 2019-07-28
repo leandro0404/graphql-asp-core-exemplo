@@ -41,7 +41,7 @@ namespace API.Instragram
 
             app.UseGraphQL();
             app.UseMvc();
-            app.UseFakeRepository();
+            //app.UseFakeRepository();
         }
     }
 }

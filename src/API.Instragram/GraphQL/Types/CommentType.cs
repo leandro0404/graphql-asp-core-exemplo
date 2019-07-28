@@ -11,6 +11,7 @@ namespace API.Instragram.GraphQL.Types
             Field(x=>x.Id);
             Field(x => x.Text);
             Field(x => x.Created);
+            Field<AuthorType>(typeof(Author).Name);
 
         }
     }
