@@ -14,7 +14,7 @@ Pacotes usados.
  
  * query simples  
 
-```javascript
+```graphql
  query {
   post
   {
@@ -26,7 +26,7 @@ Pacotes usados.
  ![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/graphql-request.png)
 
 * copie a o trecho abaixo para começar entender  o formato de consultas
- ```javascript
+ ```graphql
 query {
   post
 (
@@ -69,7 +69,7 @@ query {
 ```
 ![alt text](https://github.com/leandro0404/graphql-asp-core-exemplo/blob/master/images/query_exemplo_passando_filtro.png)
 
-```javascript
+```graphql
 mutation Post($post: PostInputType!) {
   createPost(postInput: $post) {
     id
@@ -80,7 +80,7 @@ mutation Post($post: PostInputType!) {
 ```
 
 * query variables
-```javascript
+```graphql
 {
   "post": {
     "description": "name",
@@ -93,7 +93,7 @@ mutation Post($post: PostInputType!) {
 
 
 * consultas complexas envolvendo filtros com join em itens filhos
-```javascript
+```graphql
 query {
  post
 (
