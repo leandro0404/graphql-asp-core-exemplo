@@ -6,9 +6,15 @@ using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
+using System.IO;
+using System.Text;
 
 namespace API.Instragram
 {
@@ -29,11 +35,50 @@ namespace API.Instragram
     {
         public static void AddRepository(this IServiceCollection services, IConfiguration Configuration)
         {
-            //services.AddDbContext<PostDbContext>(option => option.UseInMemoryDatabase(databaseName: "PostDataBaseMemory"));
-            services.AddDbContext<PostDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<PostRepository>();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
+            services.AddDbContext<PostDbContext>(((serviceProvider, options) =>
+            {
+                var httpContext = serviceProvider.GetService<IHttpContextAccessor>().HttpContext;
+
+                //não  estou conseguindo pegar o content body
+                //var bodyParameter = GetRawBodyString(httpContext, Encoding.UTF8);
+                var databaseQuerystringParameter = httpContext.Request.Query["database"].ToString();
+
+
+                var db2ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+
+                //if (bodyParameter.Contains("filter"))
+                if (!String.IsNullOrEmpty(databaseQuerystringParameter))
+                {
+
+                    db2ConnectionString = Configuration.GetConnectionString("database1");
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.WriteLine("                 mudei a conection string do banco");
+                }
+
+                options.UseInMemoryDatabase(databaseName: db2ConnectionString);
+
+
+
+            }));
+
             services.AddScoped<IPostRepository, PostRepository>();
 
+       
+
+        }
+        public static string GetRawBodyString(this HttpContext httpContext, Encoding encoding)
+        {
+            var body = "";
+
+            using (var reader = new StreamReader(httpContext.Request.Body))
+            {
+                body = reader.ReadToEnd();
+
+            }
+            return body;
         }
     }
 
@@ -60,4 +105,6 @@ namespace API.Instragram
             return app;
         }
     }
+
+
 }
